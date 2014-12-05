@@ -1,0 +1,16 @@
+Changelog file for Dropbox Media Source.
+
+
+Dropbox-2.0.0-beta
+====================================
+- Used Dropbox PHP SDK v1.1.4
+- Total code refactoring
+- Added content caching
+- Added files creating and updating
+
+
+Dropbox Media Source 1.0-beta1
+====================================
+- First release
+
+
