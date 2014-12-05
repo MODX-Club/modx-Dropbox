@@ -814,8 +814,8 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 			'cacheable' => array(
 				'name' => 'cacheable',
 				'type' => 'combo-boolean',
-				'options' => '1',
-				'value' => '',
+				'options' => '',
+				'value' => '1',
 			),
 			'skipFiles' => array(
 				'name' => 'skipFiles',
