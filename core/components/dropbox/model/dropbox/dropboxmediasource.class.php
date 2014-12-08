@@ -1,18 +1,10 @@
 <?php
 
 require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
-require_once dirname(dirname(dirname(__FILE__))) . "/include/dropbox/lib/Dropbox/autoload.php";
-use \Dropbox as dbx;
-
-# require_once MODX_CORE_PATH . 'components/dropbox/include/DropboxAutoloader.php';
+require_once dirname(dirname(dirname(__FILE__))) . "/include/client.class.php";  
 
 class dropboxMediaSource extends modMediaSource implements modMediaSourceInterface
 {
-	protected $loaderPaths;
-	/**
-	 * @var ElementPropertySession
-	 */
-	private $session;
 	/**
 	 * @var DropboxClient
 	 */
@@ -26,6 +18,8 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 	const THUMBNAIL_FORMAT_PNG = 'png';
     
     protected $_properties = array();
+    
+    protected $initialized = false;
 
 	/**
 	 * Override the constructor to always force Dropbox sources not to be streams
@@ -55,23 +49,21 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 		}
         $this->ctx->prepare();
         
-        $this->_properties = $this->getPropertyList();
-        
-        # print $this->xpdo->context->key;
-        
-        # print_r($this->properties);
-        
-        # print $this->getProperty('authToken');
-        
-        # exit;
+        $this->_properties = $this->getPropertyList(); 
         
         return true; 
 	}
     
-    protected function & getClient(){
+    public function & getClient(){
         if(!$this->client){
+            if(
+                !$this->initialized
+                AND $this->initialize() !== true
+            ){
+                return $this->client;
+            }
             $accessToken = $this->getProperty('authToken');
-            $this->client = new dbx\Client($accessToken, "PHP-Example/1.0"); 
+            $this->client = new DropboxClient($accessToken, "PHP-Example/1.0"); 
         }
         return $this->client;
     }
@@ -793,18 +785,18 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 	{ 
           
 		$properties = array(
-			# 'consumerKey' => array(
-			# 	'name' => 'consumerKey',
-			# 	'type' => 'password',
-			# 	'options' => '',
-			# 	'value' => '',
-			# ),
-			# 'consumerSecret' => array(
-			# 	'name' => 'consumerSecret',
-			# 	'type' => 'password',
-			# 	'options' => '',
-			# 	'value' => '',
-			# ), 
+			'consumerKey' => array(
+				'name' => 'consumerKey',
+				'type' => 'password',
+				'options' => '',
+				'value' => '',
+			),
+			'consumerSecret' => array(
+				'name' => 'consumerSecret',
+				'type' => 'password',
+				'options' => '',
+				'value' => '',
+			), 
 			'authToken' => array(
 				'name' => 'authToken',
 				'type' => 'password',
@@ -992,6 +984,10 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
     			), 'error'));
                 return false;
             }
+            
+            # print_r($response);
+            # 
+            # exit;
             
             fseek($fd, 0);
             $content = fread($fd, $response['bytes']);
@@ -1341,13 +1337,46 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
     }
     
     
-    protected function getPath($path){
+    public function getPath($path){
         
         return "/" . trim($path, '/ ');
     }
     
+    
     protected function getContentCacheFilename($path){
         return $this->xpdo->getOption(xPDO::OPT_CACHE_PATH) .'default/' . $this->getCacheFileName($path, 'content');
     }    
+    
+    
+    public function getRevisions($path, $limit = null){
+        $result = null;
+        
+        if($client = & $this->getClient()){
+            $result = $client->getRevisions($path, $limit);
+        }
+        
+        return $result;
+    }
+    
+    
+    public function restoreFile($path, $rev){
+        $result = null;
+        
+        if($client = & $this->getClient()){
+            $result = $client->restoreFile($path, $rev);
+        }
+        
+        return $result;
+    }
+    
+    public function getLastCursor($pathPrefix = '/'){
+        $result = null;
+        
+        if(!$client = $this->getClient()){
+            return $result;
+        }
+        
+        return $client->getLastCursor($pathPrefix);
+    }
     
 }

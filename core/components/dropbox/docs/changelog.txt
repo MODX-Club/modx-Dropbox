@@ -1,6 +1,14 @@
 Changelog file for Dropbox Media Source.
 
 
+Dropbox-2.1.0-beta
+====================================
+- Added DropboxObject class
+- Added DropboxCursor class
+- Added DropboxEntry class
+- Code refactoring
+
+
 Dropbox-2.0.0-beta
 ====================================
 - Used Dropbox PHP SDK v1.1.4
