@@ -18,6 +18,16 @@ class DropboxEntry extends DropboxObject {
     }
     
     
+    public function save($cacheFlag= null) {
+        
+        if($this->modified){
+            $this->modified_time = strtotime($this->modified);
+        }
+        
+        return parent::save($cacheFlag);
+    }
+    
+    
     public function getContent(){
         
         if(!$source = $this->Source){
