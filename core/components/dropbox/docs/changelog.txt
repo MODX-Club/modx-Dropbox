@@ -1,6 +1,14 @@
 Changelog file for Dropbox Media Source.
 
 
+<<<<<<< HEAD
+Dropbox-2.1.1-beta
+====================================
+- MODX2.3 compability
+
+
+=======
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
 Dropbox-2.1.0-beta
 ====================================
 - Added DropboxObject class

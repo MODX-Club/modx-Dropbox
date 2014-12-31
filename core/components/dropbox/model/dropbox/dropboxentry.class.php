@@ -18,6 +18,8 @@ class DropboxEntry extends DropboxObject {
     }
     
     
+<<<<<<< HEAD
+=======
     public function save($cacheFlag= null) {
         
         if($this->modified){
@@ -28,6 +30,7 @@ class DropboxEntry extends DropboxObject {
     }
     
     
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
     public function getContent(){
         
         if(!$source = $this->Source){
@@ -79,4 +82,8 @@ class DropboxEntry extends DropboxObject {
         return $result;
     }
     
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922

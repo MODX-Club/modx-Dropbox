@@ -85,6 +85,11 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
         
         # die('getContainerList');
         
+<<<<<<< HEAD
+        $modx_2_2 = !version_compare($this->xpdo->getVersionData()['full_version'], "2.3");
+        
+=======
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
 		$response = null;
 		try {
 			$response = $this->getClient()->getMetadataWithChildren($this->getPath($path));
@@ -112,8 +117,13 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 		$canRemove = $this->checkPolicy('remove');
 		$canCreate = $this->checkPolicy('create');
 		$directoryClasses = array(
+<<<<<<< HEAD
+            "folder icon-folder"
+        );
+=======
 			'folder',
 		);
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
 		if ($this->hasPermission('directory_chmod') && $canSave) {
 			$directoryClasses[] = 'pchmod';
 		}
@@ -155,10 +165,19 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 			$entryPath = $entry['path'];
 			if ($entry['is_dir']) {
 				if ($hasDirectoryPermissions) {
+<<<<<<< HEAD
+                    
+                    $classes = implode(' ', array_unique(array_filter(array_merge($directoryClasses, array($entry['icon'])))));
+                    
+					$directories[$baseName] = array(
+						'id' => $entryPath . '/',
+						'text' => $baseName,
+=======
 					$directories[$baseName] = array(
 						'id' => $entryPath . '/',
 						'text' => $baseName,
 						'cls' => implode(' ', array_unique(array_filter(array_merge($directoryClasses, array($entry['icon']))))),
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
 						'type' => 'dir',
 						'leaf' => false,
 						'path' => $entryPath,
@@ -166,6 +185,17 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 						'perms' => '',
 						'menu' => array(),
 					);
+<<<<<<< HEAD
+                    
+                    if($modx_2_2){
+                        $directories[$baseName]['cls'] = $classes;
+                    }
+                    else{
+                        $directories[$baseName]['iconCls'] = $classes;
+                    }
+                    
+=======
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
 					$directories[$baseName]['menu'] = array(
 						'items' => $this->getListContextMenu(true, $directories[$baseName]),
 					);
@@ -195,10 +225,18 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
                     
                     $page = !empty($editAction) ? '?a='.$editAction.'&file='.$entry['path'].'&wctx='.$this->ctx->get('key').'&source='.$this->get('id') : null;
                     
+<<<<<<< HEAD
+                    $classes = implode(' ', array_unique(array_filter(array_merge($fileClasses, $cls))));
+                    
+					$files[$baseName] = array(
+						'id' => $entryPath,
+						'text' => $baseName,
+=======
 					$files[$baseName] = array(
 						'id' => $entryPath,
 						'text' => $baseName,
 						'cls' => implode(' ', array_unique(array_filter(array_merge($fileClasses, $cls)))),
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
 						'type' => 'file',
 						'leaf' => true,
 						'qtip' => $qTip,
@@ -211,6 +249,17 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 						'file' => $this->ctx->getOption('base_url', MODX_BASE_URL) . $objectUrl,
 						'menu' => array(),
 					);
+<<<<<<< HEAD
+                    
+                    if($modx_2_2){
+                        $files[$baseName]['cls'] = $classes;
+                    }
+                    else{
+                        $files[$baseName]['iconCls'] = $classes;
+                    }
+                    
+=======
+>>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
 					$files[$baseName]['menu'] = array(
 						'items' => $this->getListContextMenu(false, $files[$baseName]),
 					);
