@@ -17,9 +17,7 @@ class DropboxEntry extends DropboxObject {
         return parent::get($k, $format, $formatTemplate);
     }
     
-    
-<<<<<<< HEAD
-=======
+     
     public function save($cacheFlag= null) {
         
         if($this->modified){
@@ -29,8 +27,7 @@ class DropboxEntry extends DropboxObject {
         return parent::save($cacheFlag);
     }
     
-    
->>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
+     
     public function getContent(){
         
         if(!$source = $this->Source){
@@ -81,9 +78,5 @@ class DropboxEntry extends DropboxObject {
         
         return $result;
     }
-    
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 11260b85db7630bdaa356d3b97e848c91131d922
+     
+} 
