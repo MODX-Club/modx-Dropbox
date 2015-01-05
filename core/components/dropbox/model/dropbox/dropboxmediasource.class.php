@@ -310,7 +310,7 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 				'fullRelativeUrl' => $objectUrl,
 				'ext' => $ext,
 				'pathname' => $entryPath,
-				'lastmod' => $entry['modified'],
+				'lastmod' => strtotime($entry['modified']),
 				'leaf' => true,
 				'size' => $entry['bytes'],
 				'thumb' => $this->ctx->getOption('manager_url', MODX_MANAGER_URL) . 'templates/default/images/restyle/nopreview.jpg',
@@ -1272,7 +1272,7 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 			if ($id <= 0) {
 				$id = $this->get('source');
 			}
-			$this->connectorUrl = 'assets/components/dropbox/connector.php?source=' . $id;
+    		$this->connectorUrl = $this->ctx->getOption('assets_url', MODX_ASSETS_URL) . 'components/dropbox/connector.php?source=' . $id;
 		}
 		return $this->connectorUrl;
 	}

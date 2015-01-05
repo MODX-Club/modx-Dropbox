@@ -1,5 +1,10 @@
 Changelog file for Dropbox Media Source.
 
+Dropbox-2.1.2-beta
+====================================
+- Minor bugfix
+
+
 Dropbox-2.1.1-beta
 ====================================
 - MODX2.3 compability
