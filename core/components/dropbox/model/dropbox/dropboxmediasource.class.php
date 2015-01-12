@@ -80,9 +80,9 @@ class dropboxMediaSource extends modMediaSource implements modMediaSourceInterfa
 	 * @param string $path
 	 * @return array
 	 */
-	public function getContainerList($path)
-	{ 
-        $modx_2_2 = !version_compare($this->xpdo->getVersionData()['full_version'], "2.3"); 
+	public function getContainerList($path){
+		$versionData = $this->xpdo->getVersionData();
+        	$modx_2_2 = !version_compare($versionData['full_version'], "2.3"); 
         
 		$response = null;
 		try {
