@@ -17,8 +17,9 @@ class DropboxCursor extends DropboxObject {
     public function getDelta(){
         
         if(
-            !$this->cursor
-            OR !$client = $this->getClient()
+            // !$this->cursor
+            // OR 
+            !$client = $this->getClient()
         ){
             return null;
         } 
