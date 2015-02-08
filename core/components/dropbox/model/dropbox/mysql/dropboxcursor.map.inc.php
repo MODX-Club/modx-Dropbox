@@ -18,7 +18,7 @@ $xpdo_meta_map['DropboxCursor']= array (
       'dbtype' => 'varchar',
       'precision' => '512',
       'phptype' => 'string',
-      'null' => false,
+      'null' => true,
     ),
     'has_more' => 
     array (
