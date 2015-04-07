@@ -3,6 +3,9 @@
 require_once MODX_CORE_PATH . 'model/modx/sources/modmediasource.class.php';
 require_once dirname(dirname(dirname(__FILE__))) . "/include/client.class.php";  
 
+use \Dropbox as dbx;
+
+
 class dropboxMediaSource extends modMediaSource implements modMediaSourceInterface
 {
 	/**
