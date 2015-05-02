@@ -1,5 +1,9 @@
 Changelog file for Dropbox Media Source.
 
+Dropbox-2.1.3-beta
+====================================
+- Minor bugfix
+
 Dropbox-2.1.2-beta
 ====================================
 - Minor bugfix
